@@ -9,12 +9,12 @@ class App extends Component {
         isLoggedIn: !!localStorage.getItem(TOKEN_KEY),
     }
 
-    loginHandler = (response) => {
+    handleLogin = (response) => {
         localStorage.setItem(TOKEN_KEY, response);
         this.setState({isLoggedIn: true});
     }
 
-    logoutHandler = () => {
+    handleLogout = () => {
         localStorage.removeItem(TOKEN_KEY);
         this.setState({isLoggedIn: false});
     }
@@ -23,9 +23,9 @@ class App extends Component {
     return (
       <div className="App">
         <Header isLoggedIn = {this.state.isLoggedIn}
-                logoutHandler = {this.logoutHandler}/>
+                handleLogout = {this.handleLogout}/>
         <Main isLoggedIn = {this.state.isLoggedIn}
-              loginHandler = {this.loginHandler}/>
+              handleLogin = {this.handleLogin}/>
       </div>
     );
   }
