@@ -4,11 +4,22 @@ import { Main } from './Main';
 import { Header } from './Header';
 
 class App extends Component {
-  render() {
+    state = {
+        isLoggedIn: false
+    }
+
+    loginHandler = (response) => {
+        this.setState({
+            isLoggedIn: true
+        });
+    }
+
+    render() {
     return (
       <div className="App">
         <Header/>
-        <Main/>
+        <Main isLoggedIn = {this.state.isLoggedIn}
+              loginHandler = {this.loginHandler}/>
       </div>
     );
   }
