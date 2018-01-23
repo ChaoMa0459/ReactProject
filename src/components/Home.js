@@ -1,12 +1,11 @@
 import React from 'react';
-import { Tabs, Button, Spin } from 'antd';
+import { Tabs, Spin } from 'antd';
 import {API_ROOT, GEO_OPTIONS, POS_KEY, AUTH_PREFIX, TOKEN_KEY} from '../constants';
 import $ from 'jquery';
 import { Gallery } from './Gallery';
-import { CreatPostButton } from './CreatPostButton';
+import { CreatePostButton } from './CreatPostButton';
 
 const TabPane = Tabs.TabPane;
-const operations = <Button>Extra Action</Button>;
 
 export class Home extends React.Component {
     state = {
@@ -69,9 +68,7 @@ export class Home extends React.Component {
     }
 
     loadNearbyPosts = () => {
-        //const { lat, lon } = JSON.parse(localStorage.getItem(POS_KEY));
-        const lat = 37.7915953;
-        const lon = -122.3937977;
+        const { lat, lon } = JSON.parse(localStorage.getItem(POS_KEY));
         this.setState({loadingPosts: true, error: ''});
         $.ajax({
             url: `${API_ROOT}/search?lat=${lat}&lon=${lon}&range=20`,
@@ -91,7 +88,7 @@ export class Home extends React.Component {
     }
 
     render() {
-        const createPostButton = <CreatPostButton/>;
+        const createPostButton = <CreatePostButton loadNearbyPosts = {this.loadNearbyPosts}/>;
 
         return (
                 <Tabs tabBarExtraContent={createPostButton} className="main-tabs">
