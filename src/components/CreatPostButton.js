@@ -44,7 +44,7 @@ export class CreatPostButton extends React.Component {
                        onCancel={this.handleCancel}
                        cancelText={"Cancel"}
                 >
-                    <WrappedCreatePostForm></WrappedCreatePostForm>
+                    <WrappedCreatePostForm/>
                 </Modal>
             </div>
         );
