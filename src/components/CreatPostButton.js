@@ -1,5 +1,6 @@
 import React from 'react';
 import { Modal, Button } from 'antd';
+import { WrappedCreatePostForm } from './CreateButtonForm';
 
 export class CreatPostButton extends React.Component {
     state = {
@@ -43,7 +44,7 @@ export class CreatPostButton extends React.Component {
                        onCancel={this.handleCancel}
                        cancelText={"Cancel"}
                 >
-                    <p>{ModalText}</p>
+                    <WrappedCreatePostForm></WrappedCreatePostForm>
                 </Modal>
             </div>
         );
