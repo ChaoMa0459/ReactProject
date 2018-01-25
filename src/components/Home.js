@@ -68,8 +68,8 @@ export class Home extends React.Component {
         }
     }
 
-    loadNearbyPosts = () => {
-        const { lat, lon } = JSON.parse(localStorage.getItem(POS_KEY));
+    loadNearbyPosts = (location) => {
+        const { lat, lon } = location ? location : JSON.parse(localStorage.getItem(POS_KEY));
         this.setState({loadingPosts: true, error: ''});
         return $.ajax({
             url: `${API_ROOT}/search?lat=${lat}&lon=${lon}&range=20`,
@@ -98,7 +98,7 @@ export class Home extends React.Component {
                     </TabPane>
                     <TabPane tab="Map" key="2">
                         <WrappedAroundMap
-                            //loadNearbyPosts={this.loadNearbyPosts}
+                            loadNearbyPosts={this.loadNearbyPosts}
                             posts={this.state.posts}
                             googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places"
                             loadingElement={<div style={{ height: `100%` }} />}

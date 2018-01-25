@@ -1,41 +1,32 @@
 import React from 'react';
 import { POS_KEY } from '../constants';
-
-const {
-    withScriptjs,
-    withGoogleMap,
-    GoogleMap,
-    Marker,
-    InfoWindow,
-} = require("react-google-maps");
+import { withScriptjs, withGoogleMap, GoogleMap } from'react-google-maps';
+import {AroundMarker} from './AroundMarker'
 
 class AroundMap extends React.Component {
-    state = {
-        isOpen: false,
+    reloadMarkers = () => {
+        const center = this.map.getCenter();
+        const location = { lat: center.lat(), lon: center.lng()};
+        this.props.loadNearbyPosts(location)
     }
 
-    onToggleOpen = () => {
-        this.setState((prevState) => ({ isOpen: !prevState.isOpen }));
+    getMapRef = (map) => {
+        this.map = map;
+        window.map = map;
     }
+
     render() {
         const { lat, lon } = JSON.parse(localStorage.getItem(POS_KEY));
         return (
             <GoogleMap
-                defaultZoom={8}
+                ref = {this.getMapRef}
+                defaultZoom={11}
                 defaultCenter={{ lat: lat, lng: lon }}
+                onDragEnd={this.reloadMarkers}
             >
-                {this.props.posts.map((post) =>
-                    <Marker
-                        position={{ lat: post.location.lat, lng: post.location.lon }}
-                        onClick={this.onToggleOpen}
-                        key={post.url}
-                    >
-                        {this.state.isOpen ?
-                            <InfoWindow onCloseClick={this.onToggleOpen}>
-                                <div>text</div>
-                            </InfoWindow> : null}
-                    </Marker>
-                )}
+                {this.props.posts ? this.props.posts.map((post) =>
+                    <AroundMarker post={post} key={post.url}/>
+                ) : null}
             </GoogleMap>
         );
     }
