@@ -1,8 +1,12 @@
-Download IntelliJ IDEA (Ultimate)
-install node.js from website (npm will be installed as well)
-npm install -g create-react-app
-create-react-app react-web
-cd react-web
-npm install -S XXX(all the packages needed)
-npm start
-Then the website will be shown in the default browser.
+Below you will find some information on how to perform this project.<br>
+
+## Steps
+
+- Download IntelliJ IDEA (Ultimate)
+- Install node.js from website (npm will be installed as well)
+- npm install -g create-react-app
+- create-react-app react-web
+- cd react-web
+- npm install -S XXX(all the packages needed)
+- npm start
+- Then the website will be shown in the default browser.
